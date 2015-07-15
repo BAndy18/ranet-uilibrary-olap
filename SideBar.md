@@ -1,0 +1,6 @@
+  * [Readme](Readme.md)
+  * [What's new](WhatsNew.md)
+  * [How to download and install](DownloadInstall.md)
+  * [How to purchase](HowToPurchase.md)
+  * [Technical support](TechnicalSupport.md)
+  * [Visit  our new official web-site](http://silverlight.galantis.com/)

@@ -1,0 +1,13 @@
+#### Pivot Grid. Editing Cube Data ####
+If the cube supports editing (the dimension group has a writeback partition), then it is possible to use the PivotGrid table in the editing mode to make changes to the cube data directly.
+
+The table section accessible for editing is highlighted with **yellow background color**. It is formed depending on the cube security settings, types of indicators (calculated indicators are not editable), etc. It is permitted to write an arithmetical expression using the syntax and functions of the MDX language. It gives the possibility to calculate an indicator using the current context (the servers does it when recalculating). The table cells modified by the user are highlighted with background color (**blue cell background**) and text color (**dark-blue bold text in the cell**). Display of the cell depends on the current server data synchronization mode.
+#### There are two server data synchronization modes: ####
+  * Automatic update: any modification of the cell results in sending the changes to the server and recalculation of the data. The recalculated result is returned back to the client.
+  * Working with the cache memory: the modifications are stored in the cache memory in the local workstation; the modifications are sent to the server on the user’s command Save changes (Recalculate, Recalculate table data with current changes), in order to reduce traffic and ensure fluent response.
+
+Thus, the modified cells that are not yet updated to the server, are highlighted with blue background color, the cells updated with the server are shown with dark-blue bold text.
+When using cache memory, the user can send the data to the server for recalculation as often as necessary. Only the modifications stored in the cache memory since the last save operation (recalculation) or since the beginning of editing, can be rolled back Undo in the pivot grid table. In order to undo the recalculated changes, it is necessary to roll back the whole transaction.
+All changes are isolated within the user session, they are not accessible to other users until the transaction is fixed.
+The data can be entered both to list type members and to aggregates. When editing aggregates, allocation mechanisms are applied automatically based on the number of subordinated list members. Generally, there is a large number of members in the cube dimensions, therefore automatic allocation should be used with caution, as it can generate millions of records, which would substantially slow down the application or turn it inoperative.
+For this reason, the number of updated cells shall be controlled and limited, and the developer of the MDX query should determine the updating rules in the UPDATE CUBE command.
